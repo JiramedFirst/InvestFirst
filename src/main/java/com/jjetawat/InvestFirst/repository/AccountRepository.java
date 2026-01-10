@@ -1,14 +1,15 @@
 package com.jjetawat.InvestFirst.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.jjetawat.InvestFirst.model.Account;
 import com.jjetawat.InvestFirst.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 	
-	Optional<User> findByEmail(String email);
+	List<Account> findByUser(User user);
 }

@@ -2,7 +2,7 @@ package com.jjetawat.InvestFirst.model;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,21 +17,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "holdings")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account {
+public class Holding {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String accountName;
-	private String accountType;
+	
+	private String symbol;
+	private String assetName;
+	
 	@Column(precision = 19, scale = 4)
-	private BigDecimal balance;
+	private BigDecimal quantity;
+	
+	@Column(precision = 19, scale = 4)
+	private BigDecimal averagePrice;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private User user;
 
 	public Long getId() {
@@ -42,28 +49,36 @@ public class Account {
 		this.id = id;
 	}
 
-	public String getAccountName() {
-		return accountName;
+	public String getSymbol() {
+		return symbol;
 	}
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
-	public String getAccountType() {
-		return accountType;
+	public String getAssetName() {
+		return assetName;
 	}
 
-	public void setAccountType(String accountType) {
-		this.accountType = accountType;
+	public void setAssetName(String assetName) {
+		this.assetName = assetName;
 	}
 
-	public BigDecimal getBalance() {
-		return balance;
+	public BigDecimal getQuantity() {
+		return quantity;
 	}
 
-	public void setBalance(BigDecimal balance) {
-		this.balance = balance;
+	public void setQuantity(BigDecimal quantity) {
+		this.quantity = quantity;
+	}
+
+	public BigDecimal getAveragePrice() {
+		return averagePrice;
+	}
+
+	public void setAveragePrice(BigDecimal averagePrice) {
+		this.averagePrice = averagePrice;
 	}
 
 	public User getUser() {
@@ -73,5 +88,6 @@ public class Account {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
+	
 }

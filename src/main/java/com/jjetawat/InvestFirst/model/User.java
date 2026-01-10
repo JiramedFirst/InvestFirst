@@ -2,6 +2,8 @@ package com.jjetawat.InvestFirst.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,13 +25,29 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(unique = true, nullable = false)
 	private String email;
+	
 	@Column(nullable = false)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	
 	private String fullname;
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Account> accounts;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Holding> holdings;
+	
+	public List<Holding> getHoldings() {
+		return holdings;
+	}
+
+	public void setHoldings(List<Holding> holdings) {
+		this.holdings = holdings;
+	}
 
 	public Long getId() {
 		return id;
