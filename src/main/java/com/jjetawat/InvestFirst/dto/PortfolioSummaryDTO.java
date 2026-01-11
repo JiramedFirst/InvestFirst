@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 public class PortfolioSummaryDTO {
 	private BigDecimal totalPortfolioValue; // Sum of all marketValues
     private BigDecimal totalProfitLoss;     // Sum of all profitLoss
-    private List<HoldingDTO> assets;        // The detailed list
+    private List<HoldingDTO> holdings;        // The detailed list
     
-	public PortfolioSummaryDTO(BigDecimal totalPortfolioValue, BigDecimal totalProfitLoss, List<HoldingDTO> assets) {
+	public PortfolioSummaryDTO(BigDecimal totalPortfolioValue, BigDecimal totalProfitLoss, List<HoldingDTO> holdings) {
 		super();
 		this.totalPortfolioValue = totalPortfolioValue;
 		this.totalProfitLoss = totalProfitLoss;
-		this.assets = assets;
+		this.holdings = holdings;
 	}
 
 	public BigDecimal getTotalPortfolioValue() {
@@ -38,12 +38,12 @@ public class PortfolioSummaryDTO {
 		this.totalProfitLoss = totalProfitLoss;
 	}
 
-	public List<HoldingDTO> getAssets() {
-		return assets;
+	public List<HoldingDTO> getHoldings() {
+		return holdings;
 	}
 
-	public void setAssets(List<HoldingDTO> assets) {
-		this.assets = assets;
+	public void setHoldings(List<HoldingDTO> holdings) {
+		this.holdings = holdings;
 	}
     
     

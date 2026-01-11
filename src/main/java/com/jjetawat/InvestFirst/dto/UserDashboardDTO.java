@@ -1,6 +1,7 @@
 package com.jjetawat.InvestFirst.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +14,18 @@ public class UserDashboardDTO {
     private BigDecimal totalCashBalance;
     private BigDecimal totalStockValue;
     private BigDecimal netWorth;
+    private List<HoldingDTO> holding;
     
+	
+
 	public UserDashboardDTO(String fullname, BigDecimal totalCashBalance, BigDecimal totalStockValue,
-			BigDecimal netWorth) {
+			BigDecimal netWorth, List<HoldingDTO> holding) {
 		super();
 		this.fullname = fullname;
 		this.totalCashBalance = totalCashBalance;
 		this.totalStockValue = totalStockValue;
 		this.netWorth = netWorth;
+		this.holding = holding;
 	}
 
 	public String getFullname() {
@@ -53,6 +58,14 @@ public class UserDashboardDTO {
 
 	public void setNetWorth(BigDecimal netWorth) {
 		this.netWorth = netWorth;
+	}
+
+	public List<HoldingDTO> getHolding() {
+		return holding;
+	}
+
+	public void setHolding(List<HoldingDTO> holding) {
+		this.holding = holding;
 	}
     
     

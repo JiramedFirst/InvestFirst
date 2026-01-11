@@ -1,7 +1,9 @@
 package com.jjetawat.InvestFirst.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jjetawat.InvestFirst.model.Account;
@@ -13,7 +15,8 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class TransactionService {
-
+	
+	@Autowired
 	private final TransactionRepository transactionRepository;
 	private final AccountRepository accountRepository;
 	
@@ -41,7 +44,8 @@ public class TransactionService {
 		return transactionRepository.save(transaction);
 	}
 	
-	public Transaction getTransaction(Long accountId) {
-		return transactionRepository.getReferenceById(accountId);
-	}
+	public List<Transaction> getTransactionsByAccountId(Long accountId) {
+        // This calls the repository method we just created
+        return transactionRepository.findByAccountId(accountId);
+    }
 }

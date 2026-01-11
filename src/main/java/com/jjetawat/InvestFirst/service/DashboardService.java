@@ -1,9 +1,12 @@
 package com.jjetawat.InvestFirst.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.jjetawat.InvestFirst.dto.HoldingDTO;
+import com.jjetawat.InvestFirst.dto.PortfolioSummaryDTO;
 import com.jjetawat.InvestFirst.dto.UserDashboardDTO;
 import com.jjetawat.InvestFirst.model.Account;
 import com.jjetawat.InvestFirst.model.User;
@@ -30,13 +33,17 @@ public class DashboardService {
                 .map(Account::getBalance)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // 2. Get Total Stock Value from PortfolioService
-        BigDecimal totalStockValue = portfolioService.getSummary(userId).getTotalPortfolioValue();
+        // 2. Get the Portfolio Summary object
+        PortfolioSummaryDTO portfolioSummary = portfolioService.getSummary(userId);
 
-        // 3. Combine them
+        // 3. Extract the value and the list of holdings from that object
+        BigDecimal totalStockValue = portfolioSummary.getTotalPortfolioValue();
+        List<HoldingDTO> assets = portfolioSummary.getHoldings(); // Corrected reference
+        
+        // 4. Combine for Net Worth
         BigDecimal netWorth = totalCash.add(totalStockValue);
 
-        return new UserDashboardDTO(user.getFullname(), totalCash, totalStockValue, netWorth);
+        return new UserDashboardDTO(user.getFullname(), totalCash, totalStockValue, netWorth,assets);
     }
 	
 }
